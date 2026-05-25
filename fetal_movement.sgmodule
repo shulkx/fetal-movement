@@ -1,0 +1,6 @@
+#!name=Fetal Movement Tracker
+#!desc=记录胎动 — Surge 脚本配合 Apple 快捷指令使用
+#!system=ios
+
+[Script]
+胎动记录 = type=generic,script-path=fetal_movement.js,timeout=10
