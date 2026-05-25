@@ -152,6 +152,8 @@ function handleRecord() {
   if (nowTs - cycle.started_ts >= CYCLE_DURATION_MS) {
     const summary =
       "有效：" + cycle.effective_count + " 次，总：" + cycle.total_count + " 次";
+    archiveActiveCycle(state, "expired");
+    saveState(state);
     const msg =
       "上一个周期（" +
       formatTime(cycle.started_ts) +
@@ -159,9 +161,8 @@ function handleRecord() {
       formatTime(cycle.scheduled_end_ts) +
       "）已结束并归档。\n" +
       summary +
-      "\n是否用本次点击开启新的 1 小时周期？";
-    archiveActiveCycle(state, "expired");
-    saveState(state);
+      "\n再次点击「记录胎动」可开启新周期。";
+    notify(msg);
     return { status: "expired_and_closed", message: msg };
   }
 
